@@ -1,0 +1,1 @@
+<!-- DecoArtpARADis Ecommerce website with Django + React -->
