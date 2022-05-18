@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class UserAccountManager(BaseUserManager):
     
-    def create_user(self, email, first_name, last_name, password=None):
+    def create_user(self, username, email, first_name, last_name, password=None):
         """
         Creates and saves a user with a given email, first name, last name and password.
         """
@@ -11,18 +11,19 @@ class UserAccountManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         email = self.normalize_email(email)
-        user = self.model(email=email, first_name=first_name, last_name=last_name)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name)
 
         user.set_password(password)
         user.save()
 
         return user
 
-    def create_superuser(self, email, first_name, last_name, password=None):
+    def create_superuser(self, username, email, first_name, last_name, password=None):
         """
         Creates and saves a  superuser with a given email, first name, last name and password.
         """
         user = self.create_user(
+            username,
             email,
             first_name,
             last_name,
@@ -48,7 +49,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'password']
 
     def get_full_name(self):
         return self.first_name
