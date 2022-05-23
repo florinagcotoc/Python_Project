@@ -63,19 +63,14 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 class Products(models.Model):
 
-    Tablouri = 'tablouri'
-    Copaci = 'copaci'
-    Ceasuri = 'ceasuri'
-
-    CATEGORY_CHOICES = [
-        (Tablouri, 'tablouri'),
-        (Copaci, 'copaci'),
-        (Ceasuri, 'ceasuri'),
-    ]
+    class Category(models.TextChoices):
+        Tablouri = 'tablouri'
+        Copaci = 'copaci'
+        Ceasuri = 'ceasuri'
 
     product_name = models.CharField(max_length=255, unique=True)
     image = models.ImageField(upload_to ='resources/images/')
-    category = models.CharField(max_length=9,choices=CATEGORY_CHOICES, default=None)
+    category = models.CharField(max_length=9,choices=Category.choices, default=None)
     description = models.CharField(max_length=1000)
     price = models.DecimalField(max_digits=5,decimal_places=2)
     stock = models.IntegerField()
@@ -85,17 +80,14 @@ class Products(models.Model):
 
 
 class Orders(models.Model):
-    Ramburs = 'ramburs'
-    Card = 'card'
 
-    PAYMENT_CHOICES = [
-        (Ramburs, 'ramburs'),
-        (Card, 'card'),
-    ]
+    class PaymentMethod(models.TextChoices):
+        Ramburs = 'ramburs'
+        Card = 'card'
 
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    payment_method = models.CharField(max_length = 8, choices=PAYMENT_CHOICES, default=None)
+    payment_method = models.CharField(max_length = 8, choices=PaymentMethod.choices, default=None)
     shipping_price = models.DecimalField(max_digits=5,decimal_places=2)
     total_price = models.DecimalField(max_digits=5,decimal_places=2)
     is_paid = models.BooleanField(default=False)
