@@ -69,7 +69,7 @@ class Products(models.Model):
         Ceasuri = 'ceasuri'
 
     product_name = models.CharField(max_length=255, unique=True)
-    image = models.ImageField(upload_to ='resources/images/')
+    image = models.ImageField(upload_to ='static/images/')
     category = models.CharField(max_length=9,choices=Category.choices, default=None)
     description = models.CharField(max_length=1000)
     price = models.DecimalField(max_digits=5,decimal_places=2)
@@ -98,7 +98,7 @@ class Orders(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Users, on_delete=models.CASCADE)
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     quantity = models.IntegerField()
