@@ -39,7 +39,7 @@ class ProductDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.D
         return self.partial_update(request, pk)
 
     def delete(self, request,pk):
-        return self.delete(request, pk)
+        return self.destroy(request, pk)
 
 
 class ProductsByCategory(generics.ListAPIView):

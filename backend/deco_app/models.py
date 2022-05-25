@@ -69,7 +69,7 @@ class Products(models.Model):
         Ceasuri = 'ceasuri'
 
     product_name = models.CharField(max_length=255, unique=True)
-    image = models.ImageField(upload_to ='static/images/')
+    image = models.ImageField(null=True, blank=True)
     category = models.CharField(max_length=9,choices=Category.choices, default=None)
     description = models.CharField(max_length=1000)
     price = models.DecimalField(max_digits=5,decimal_places=2)
