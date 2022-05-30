@@ -21,7 +21,13 @@ class ProductsList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gene
     def post(self, request):
         return self.create(request)
 
-
+class ProductsByCategory(generics.ListAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = ProductByCategorySerializer
+    def get_queryset(self):
+        category = self.kwargs['category']
+        return Products.objects.filter(category=category)
+        
 class ProductDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     
     permission_classes = (AllowAny,)
@@ -42,10 +48,4 @@ class ProductDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.D
         return self.destroy(request, pk)
 
 
-class ProductsByCategory(generics.ListAPIView):
-    permission_classes = (AllowAny,)
-    serializer_class = ProductByCategorySerializer
-    def get_queryset(self):
-        category = self.kwargs['category']
-        return Products.objects.filter(category=category)
 
