@@ -4,7 +4,7 @@ import {Link } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {Row, Col, ListGroup, Image, Button, Card, Form} from 'react-bootstrap'
 import Messages from '../components/Messages'
-import { addToCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 import {useParams} from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 
@@ -24,8 +24,8 @@ function CartScreen() {
         }
       }, [dispatch, id, quantity])
     
-    const removeFromCart = () => {
-        console.log('removing cart')
+    const removeFromCartHandler = (id) => {
+        dispatch(removeFromCart(id))
     }
 
     let navigate = useNavigate(); 
@@ -76,7 +76,7 @@ function CartScreen() {
                                         </Form.Control>
                                     </Col>
                                     <Col md={1}>
-                                        <Button type='button' variant='light' onClick={()=>removeFromCart(item.product)}>
+                                        <Button type='button' variant='light' onClick={()=>removeFromCartHandler(item.product)}>
                                             <i className='fas fa-trash'></i>
                                         </Button>
                                     </Col>

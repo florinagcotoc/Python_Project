@@ -11,8 +11,7 @@ export const cartReducers = (state = {cartItems:[]}, action) => {
             const item = action.payload
             const existItem = state.cartItems.find(p => p.product === item.product)
             if (existItem) {
-                // map through the state, and loop through this array and find if the cart item matches the new item here
-                // if it matches replace the matching item with the new item
+                // find if the cart item matches the new item here, if it is True replace the matching item with the new item
                 return {
                      ...state, cartItems:state.cartItems.map(p =>
                         p.product === existItem.product ? item : p)
@@ -23,9 +22,12 @@ export const cartReducers = (state = {cartItems:[]}, action) => {
                     ...state, cartItems:[...state.cartItems,item]
                 }
             }
+        case CART_REMOVE_ITEM:
+            // action.payload is the ID of the product that we want to remove
+            return {
+                ...state, cartItems: state.cartItems.filter(p => p.product !== action.payload)
+            }
         default:
             return state
     }
 }
-
-// check if the product that we send back inside of action payload exists inside of our cart items array
