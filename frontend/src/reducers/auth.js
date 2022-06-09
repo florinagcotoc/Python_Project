@@ -1,51 +1,43 @@
 import {
+    LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    USER_LOADED_SUCCESS,
-    USER_LOADED_FAIL
+    LOGOUT,
+    REGISTER_REQUEST,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL,
 } from '../constants/types';
 
 
-const initialState = {
-    access: localStorage.getItem('access'),
-    refresh: localStorage.getItem('refresh'),
-    isAuthenticated: null,
-    user: null
-};
 
-export default function(state=initialState, action) {
-    const {type, payload} = action;
-
-    switch (type) {
+export const loginReducer = (state = {}, action) => {
+    switch(action.type) {
+        case LOGIN_REQUEST:
+            return {loading:true, }
         case LOGIN_SUCCESS:
-            localStorage.setItem('access', payload.access);
-            return {
-                ...state,
-                isAuthenticated: true,
-                access: payload.access,
-                refresh: payload.refresh
-            }
-        case USER_LOADED_SUCCESS:
-            return {
-                ...state,
-                user: payload
-            }
-        case USER_LOADED_FAIL:
-            return {
-                ...state,
-                user:null
-            }
+            return {loading:false, userInfo:action.payload}
         case LOGIN_FAIL:
-            localStorage.removeItem('access');
-            localStorage.removeItem('refresh');
-            return {
-                ...state,
-                access: null,
-                refresh: null,
-                isAuthenticated: false,
-                user: null
-            }
-        default: 
+            return {loading:false, error:action.payload}
+        case LOGOUT:
+            return {}
+        default:
             return state
     }
-};
+}
+
+
+
+export const registerReducer = (state = {}, action) => {
+    switch(action.type) {
+        case REGISTER_REQUEST:
+            return {loading:true, }
+        case REGISTER_SUCCESS:
+            return {loading:false, userInfo:action.payload}
+        case REGISTER_FAIL:
+            return {loading:false, error:action.payload}
+        case LOGOUT:
+            return {}
+        default:
+            return state
+    }
+}

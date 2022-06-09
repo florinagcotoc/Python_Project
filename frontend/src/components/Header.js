@@ -2,8 +2,19 @@ import React from 'react'
 import { Navbar, Nav, Container,Row, Col, Form, NavDropdown, FormControl, Button} from 'react-bootstrap'
 import '../index.css'
 import {LinkContainer} from 'react-router-bootstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import {logout_func} from '../actions/auth'
 
 function Header() {
+
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
+  const logoutHandler = () =>{
+    dispatch(logout_func())
+  }
+
   return (
     <header>
       <Navbar fixed="top" bg="light" expand="lg">
@@ -46,9 +57,21 @@ function Header() {
             <LinkContainer to="/cos-cumparaturi/">
                 <Nav.Link><i className='fas fa-shopping-cart'></i> Cos cumparaturi</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login">
-                <Nav.Link><i className='fas fa-user'></i> Login</Nav.Link>
-            </LinkContainer>
+            {/* info user, show the login icon only if the user is not logged in */}
+            {userInfo ? (
+              <NavDropdown title={userInfo.name} id='username'>
+                <LinkContainer to = '/profil'>
+                    <NavDropdown.Item>Profil</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Item onClick={logoutHandler}>Iesire</NavDropdown.Item>
+
+              </NavDropdown>
+            ) : (
+              <LinkContainer to="/login">
+                <Nav.Link><i className='fas fa-user'></i> Autentificare</Nav.Link>
+              </LinkContainer>
+            )}
+
           </Navbar.Collapse>
         </Container>
       </Navbar>

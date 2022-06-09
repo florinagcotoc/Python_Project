@@ -24,22 +24,28 @@ import { productListReducer } from './reducers/productReducers';
 import { productDetailsReducer } from './reducers/productDetailsReducers';
 import { productsByCategoryReducers} from './reducers/productsByCategoryReducers';
 import {cartReducers} from './reducers/cartReducers';
-
+import {loginReducer, registerReducer} from './reducers/auth';
 
 const reducer = combineReducers({
     productList : productListReducer,
     productDetails : productDetailsReducer,
     productsCategoryList : productsByCategoryReducers,
     cart: cartReducers,
+    userLogin: loginReducer,
+    userRegister : registerReducer,
+
 })
 
 // pull the data from the localStorage, parse the data and turn it back into a JavaScript object and load it into initialState
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? 
         JSON.parse(localStorage.getItem('cartItems')) : []
 
+const userInfoFromLocalStorage = localStorage.getItem('userInfo') ? 
+        JSON.parse(localStorage.getItem('userInfo')) : null
 
 const initialState = {
-    cart : {cartItems : cartItemsFromLocalStorage }
+    cart : {cartItems : cartItemsFromLocalStorage },
+    userLogin : { userInfo: userInfoFromLocalStorage}
 };
 
 const middleware = [thunk];
