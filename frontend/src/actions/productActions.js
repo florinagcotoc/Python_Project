@@ -27,7 +27,7 @@ export const listProducts = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type:PRODUCT_LIST_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
         })
     }
 
@@ -69,7 +69,7 @@ export const listProductsCategory = (category) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type:PRODUCTS_CATEGORY_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message,
         })
     }
 
