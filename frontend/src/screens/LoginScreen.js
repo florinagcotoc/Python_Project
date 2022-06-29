@@ -42,17 +42,17 @@ function LoginScreen({ history}) {
         <br/>
         <br/>
         <br/>
-        <h1> Sign In</h1>
+        <h1> Autentificare</h1>
         {error && <Messages variant='danger'>{error}</Messages>}
         {loading && <Loader/>}
         <Form onSubmit = {submitHandler}>
             <Form.Group controlId = 'email'>
                 <Form.Label className='mt-3'>
-                    Email Address
+                    Adresa de e-mail
                 </Form.Label>
                 <Form.Control 
                     type='email'
-                    placeholder='Enter email'
+                    placeholder='E-mail'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}>
                 </Form.Control>
@@ -60,24 +60,26 @@ function LoginScreen({ history}) {
 
             <Form.Group controlId = 'password'>
                 <Form.Label className='mt-3'> 
-                    Password
+                    Parola
                 </Form.Label>
                 <Form.Control 
                     type='password'
-                    placeholder='Enter password'
+                    placeholder='Parola'
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}>
                 </Form.Control>
             </Form.Group>
-            <Button className='mt-3' type="submit" variant="success">Sign In</Button>
+            <Button className='mt-3' type="submit" variant="success">Intra in cont</Button>
         </Form>
 
         <Row className='py-3'>
             <Col>
-                Don't have an account? <Link to = '/signup'>Register</Link>
+                Client nou? Creeaza cont <Link to = '/signup'>Inregistrare</Link>
+                <br/>
+                Ti-ai uitat parola? <Link to = '/reset-password'>Resetare parola</Link>
             </Col>
-
         </Row>
+        
     </FormContainer>
     )
 }

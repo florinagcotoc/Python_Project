@@ -5,9 +5,8 @@ import {Form, Button, Row, Col} from 'react-bootstrap'
 import Messages from '../components/Messages'
 import Loader from "../components/Loader";
 import {useDispatch, useSelector} from 'react-redux'
-import {login_func, register_func} from '../actions/auth'
+import {register_func} from '../actions/auth'
 import FormContainer from '../components/FormContainer';
-import { Redirect } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function SignUpScreen() {
@@ -19,6 +18,8 @@ function SignUpScreen() {
   const [password, setPassword] = useState('')
   const [re_password, setRePassword] = useState('')
   const [message, setMessage] = useState('')
+
+  const [accountCreated, setAccountCreated] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -43,9 +44,23 @@ function SignUpScreen() {
         setMessage('Passwords do not match')
       }
       else {
-        dispatch(register_func(username, first_name, last_name, email, password))
+        dispatch(
+            register_func(username, first_name, last_name, email, password, re_password),
+            setAccountCreated(true)
+        )
+
       }
-  }
+    }
+
+    if (userInfo) {
+        let path = '/'; 
+        navigate(path);
+    }
+    
+    if (accountCreated) {
+        let path = '/login'; 
+        navigate(path);
+    }
 
 
   return (
@@ -54,19 +69,19 @@ function SignUpScreen() {
         <br/>
         <br/>
         <br/>
-        <h1> Register</h1>
+        <h1> Inregistrare</h1>
         {message && <Messages variant='danger'>{message}</Messages>}
         {error && <Messages variant='danger'>{error}</Messages>}
         {loading && <Loader/>}
         <Form onSubmit = {submitHandler}>
             <Form.Group controlId = 'username'>
                 <Form.Label className='mt-3'>
-                    Username
+                    Nume utilizator
                 </Form.Label>
                 <Form.Control
                     required 
                     type='username'
-                    placeholder='Enter username'
+                    placeholder='Utilizator'
                     value={username}
                     onChange={(e)=>setUsername(e.target.value)}>
                 </Form.Control>
@@ -74,12 +89,12 @@ function SignUpScreen() {
 
             <Form.Group controlId = 'first_name'>
                 <Form.Label className='mt-3'>
-                    First Name
+                    Prenume
                 </Form.Label>
                 <Form.Control
                     required 
                     type='first_name'
-                    placeholder='Enter First Name'
+                    placeholder='Prenume'
                     value={first_name}
                     onChange={(e)=>setFirstName(e.target.value)}>
                 </Form.Control>
@@ -87,12 +102,12 @@ function SignUpScreen() {
 
             <Form.Group controlId = 'last_name'>
                 <Form.Label className='mt-3'>
-                    Last Name
+                    Nume
                 </Form.Label>
                 <Form.Control 
                     required
                     type='last_name'
-                    placeholder='Enter Last Name'
+                    placeholder='Nume'
                     value={last_name}
                     onChange={(e)=>setLastName(e.target.value)}>
                 </Form.Control>
@@ -100,12 +115,12 @@ function SignUpScreen() {
 
             <Form.Group controlId = 'email'>
                 <Form.Label className='mt-3'>
-                    Email Address
+                    Adresa de e-mail
                 </Form.Label>
                 <Form.Control 
                     required
                     type='email'
-                    placeholder='Enter email'
+                    placeholder='E-mail'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}>
                 </Form.Control>
@@ -113,12 +128,12 @@ function SignUpScreen() {
 
             <Form.Group controlId = 'password'>
                 <Form.Label className='mt-3'> 
-                    Password
+                    Parola
                 </Form.Label>
                 <Form.Control 
                     required
                     type='password'
-                    placeholder='Enter password'
+                    placeholder='Parola'
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}>
                 </Form.Control>
@@ -126,25 +141,24 @@ function SignUpScreen() {
 
             <Form.Group controlId = 're_password'>
                 <Form.Label className='mt-3'> 
-                    Confirm Password
+                    Confirmare parola
                 </Form.Label>
                 <Form.Control 
                     required
                     type='password'
-                    placeholder='Enter password again'
+                    placeholder='Confirmare parola'
                     value={re_password}
                     onChange={(e)=>setRePassword(e.target.value)}>
                 </Form.Control>
             </Form.Group>
 
-            <Button className='mt-3' type="submit" variant="success">Sign Up</Button>
+            <Button className='mt-3' type="submit" variant="success">Inregistrare</Button>
         </Form>
 
         <Row className='py-3'>
             <Col>
-                Have an Account? <Link to = '/login'>Login</Link>
+                Client existent? <Link to = '/login'>Intra in cont</Link>
             </Col>
-
         </Row>
     </FormContainer>
   )
