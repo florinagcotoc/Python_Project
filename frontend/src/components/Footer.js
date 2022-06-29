@@ -25,9 +25,8 @@ function Footer() {
               <div className="col">
                 <ul className="bullet">
                   <li><a href="/despre-noi">Despre noi</a></li>
-                  <li><a href="/blog">Blog</a></li>
                   <li><a href="/program">Program</a></li>
-                  <li><a href="/detaliile-companiei">Detaliile companie</a>i</li>
+                  <li><a href="/detaliile-companiei">Detaliile companiei</a></li>
                 </ul>
               </div>
             </div>
@@ -38,7 +37,6 @@ function Footer() {
                   <li><a href="/intrebari-frecvente">Intrebari frecvente</a></li>
                   <li><a href="/cum-cumpar">Cum cumpar</a></li>
                   <li><a href="/parerea-ta">Parerea ta</a></li>
-                  <li><a href="/discounturi-personalizate">Discounturi personalizate</a></li>
                 </ul>
               </div>
             </div>

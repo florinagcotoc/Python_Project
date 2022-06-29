@@ -48,11 +48,11 @@ function Header() {
             <Form className="d-flex">
               <FormControl
                 type="search"
-                placeholder="Search"
+                placeholder="Cauta..."
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button variant="outline-success">Cauta</Button>
             </Form>
             <LinkContainer to="/cos-cumparaturi/">
                 <Nav.Link><i className='fas fa-shopping-cart'></i> Cos cumparaturi</Nav.Link>
