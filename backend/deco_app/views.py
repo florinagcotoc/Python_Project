@@ -31,25 +31,6 @@ class UsersList(mixins.ListModelMixin, generics.GenericAPIView):
     def get(self, request):
         return self.list(request)
 
-
-# @api_view(['PATCH'])
-# @permission_classes([IsAuthenticated])
-# def updateUserProfile(request):
-#     user = request.user
-#     # when we update the user, we want to get back a new token to put it into localstorage 
-#     serializer = UserSerializerWithToken(user, many=False)
-#     data = request.data
-#     user.username = data['username']
-#     user.first_name = data['first_name']
-#     user.last_name = data['last_name']
-#     user.email = data['email']
-
-#     if data['password'] != '':
-#         user.password = data['password']
-
-#     user.save()
-    
-#     return Response(serializer.data)
 class UpdateUser(mixins.UpdateModelMixin, generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     

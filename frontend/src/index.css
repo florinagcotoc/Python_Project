@@ -72,3 +72,17 @@ h2{
 
 }
 
+.btn-update {
+  margin-top: 14px;
+  margin-left: 75px;
+}
+
+h5{
+  text-align-last: center;
+  /* margin-left: 75px; */
+}
+
+.continue{
+  margin-left: 40%;
+}
+

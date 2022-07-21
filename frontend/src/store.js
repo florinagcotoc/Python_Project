@@ -24,7 +24,8 @@ import { productListReducer } from './reducers/productReducers';
 import { productDetailsReducer } from './reducers/productDetailsReducers';
 import { productsByCategoryReducers} from './reducers/productsByCategoryReducers';
 import {cartReducers} from './reducers/cartReducers';
-import {loginReducer, registerReducer} from './reducers/auth';
+import { userDetailsReducer, userUpdateProfileReducer } from './reducers/usersReducers';
+import {loginReducer, registerReducer, } from './reducers/auth';
 
 const reducer = combineReducers({
     productList : productListReducer,
@@ -33,7 +34,8 @@ const reducer = combineReducers({
     cart: cartReducers,
     userLogin: loginReducer,
     userRegister : registerReducer,
-
+    userDetails: userDetailsReducer,
+    userUpdateProfile: userUpdateProfileReducer,
 })
 
 // pull the data from the localStorage, parse the data and turn it back into a JavaScript object and load it into initialState

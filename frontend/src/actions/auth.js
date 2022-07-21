@@ -16,6 +16,7 @@ import {
     PASSWORD_RESET_CONFIRM_REQUEST,
     PASSWORD_RESET_CONFIRM_SUCCESS,
     PASSWORD_RESET_CONFIRM_FAIL,
+    USER_DETAILS_RESET,
 } from '../constants/types';
 
 require('dotenv').config();
@@ -59,6 +60,9 @@ export const logout_func = () => (dispatch) => {
     localStorage.removeItem('userInfo')
     dispatch ({
         type:LOGOUT
+    })
+    dispatch ({
+        type:USER_DETAILS_RESET
     })
 }
 
