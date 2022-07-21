@@ -11,12 +11,30 @@ from deco_app.models import Products,Orders, OrderItem, Reviews, ShippingAddress
 # retrieve the user model
 User = get_user_model()
 
+class UserSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField(read_only=True)
+    name = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'name', 'first_name', 'last_name','token' )
+
+    def get_name(self, obj):
+        name = obj.first_name + ' ' + obj.last_name
+        if name == '':
+            name = obj.email
+        return name 
+
+    def get_token(self, obj):
+        token = RefreshToken.for_user(obj)
+        return str(token.access_token)
+        
 class UserCreateSerializer(UserCreateSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     is_admin = serializers.SerializerMethodField(read_only=True)
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('id', 'username', 'email', 'name', 'is_admin')
+        fields = ('id', 'username', 'email', 'name', 'is_admin', 'last_name','first_name')
         
     def get_name(self, obj):
         name = obj.first_name + ' ' + obj.last_name
@@ -32,7 +50,7 @@ class UserSerializerWithToken(UserCreateSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'name', 'is_admin', 'token' )
+        fields = ('id', 'username', 'email', 'name', 'first_name', 'last_name', 'is_admin', 'token' )
     
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)

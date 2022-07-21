@@ -9,5 +9,6 @@ urlpatterns = [
     path('actualizare/produs/<int:pk>/', views.UpdateProduct.as_view()),
     path('stergere/produs/<int:pk>/', views.DestroyProduct.as_view()),
     path('profil/', views.getUserProfile, name='profil'),
+    path('actualizare-profil/<int:pk>/', views.UpdateUser.as_view()),
     path('utilizatori/', views.UsersList.as_view()),
 ]

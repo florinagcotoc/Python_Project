@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from deco_app.models import Users,Products,Reviews,ShippingAddress,OrderItem,Orders
-from deco_app.serializers import UserCreateSerializer,ProductsSerializer,OrdersSerializer,OrderItemSerializer,ReviewsSerializer,ShippingAddressSerializer,ProductByCategorySerializer, UserSerializerWithToken
+from deco_app.serializers import UserSerializer,UserCreateSerializer,ProductsSerializer,OrdersSerializer,OrderItemSerializer,ReviewsSerializer,ShippingAddressSerializer,ProductByCategorySerializer, UserSerializerWithToken
 from rest_framework.views import APIView
 from rest_framework import mixins, generics
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -30,6 +30,38 @@ class UsersList(mixins.ListModelMixin, generics.GenericAPIView):
 
     def get(self, request):
         return self.list(request)
+
+
+# @api_view(['PATCH'])
+# @permission_classes([IsAuthenticated])
+# def updateUserProfile(request):
+#     user = request.user
+#     # when we update the user, we want to get back a new token to put it into localstorage 
+#     serializer = UserSerializerWithToken(user, many=False)
+#     data = request.data
+#     user.username = data['username']
+#     user.first_name = data['first_name']
+#     user.last_name = data['last_name']
+#     user.email = data['email']
+
+#     if data['password'] != '':
+#         user.password = data['password']
+
+#     user.save()
+    
+#     return Response(serializer.data)
+class UpdateUser(mixins.UpdateModelMixin, generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    
+    queryset = Users.objects.all()
+    serializer_class = UserSerializer
+
+    def put(self, request, pk):
+        return self.update(request, pk)
+
+    def patch(self, request,pk):
+        return self.partial_update(request, pk)
+
 
 class ProductsList(mixins.ListModelMixin, generics.GenericAPIView):
     
