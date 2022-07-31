@@ -1,0 +1,42 @@
+/* Footer */
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+section {
+    padding: 50px 0;
+}
+
+/* section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 190px;
+    text-transform: uppercase;
+} */
+#footer {
+    background: #65a286 !important;
+}
+
+#footer h5{
+	padding-left: 10px;
+    border-left: 2px solid #ffffff;
+    padding-bottom: 4px;
+    margin-bottom: 15px;
+    color:#ffffff;
+}
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+}
+
+#footer ul.quick-links li:hover{
+	padding: 3px 0;
+	margin-left:5px;
+	font-weight:700;
+}
+#footer ul.quick-links li a i{
+	margin-right: 5px;
+}
+
+.text-center{
+    color: white;
+    margin-bottom: auto;
+}
