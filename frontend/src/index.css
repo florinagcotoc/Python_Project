@@ -2,6 +2,16 @@ main{
   min-height: 80vh;
 }
 
+
+/* .left-border{
+  margin-left: -410px;
+
+}
+
+.right-border{
+  margin-left: 1600px;
+
+} */
 /* .card-md{
   height: 40rem;
   margin-top: 3px;
@@ -85,4 +95,17 @@ h5{
 .continue{
   margin-left: 40%;
 }
+
+.price{
+    font-size: 20px;
+}
+
+.product-name{
+  color: 	#198754;
+}
+/* Notifications */
+.info-message{
+  margin-left: 60px;
+}
+/* End notification */
 
