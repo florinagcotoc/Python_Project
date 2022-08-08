@@ -15,7 +15,7 @@ const Product= ({product}) => {
             <Card.Body>
                 <Link to={`/produs/${product.id}`}>
                     <Card.Title as="div">
-                        <strong>{product.product_name}</strong>
+                        <strong className='product-name'>{product.product_name}</strong>
                     </Card.Title>
                 </Link>
 
@@ -28,7 +28,7 @@ const Product= ({product}) => {
                 </Card.Text>
 
                 <Card.Text as="h3">
-                    {product.price}€
+                    {product.price} lei
                 </Card.Text>
             </Card.Body>
         </Card>

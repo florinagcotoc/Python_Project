@@ -30,12 +30,13 @@ function CartScreen() {
 
     let navigate = useNavigate(); 
     const checkoutHandler = () => {
-        let path = '/login?redirect=shipping'; 
+        let path = '/finalizare-comanda/livrare-si-plata/'; 
         navigate(path);
     }
 
     return (
     <div>
+        <br/>
         <br/>
         <br/>
         <br/>
@@ -92,12 +93,18 @@ function CartScreen() {
                     <ListGroup variant='flush'>
                         {/*first item will be the subtotal  */}
                         <ListGroup.Item>
-                            <h4>Subtotal: {cartItems.reduce((accumulator, item)=> accumulator + item.qty, 0)} produse</h4>
-                            {cartItems.reduce((accumulator, item)=> accumulator + item.qty * item.price, 0).toFixed(2)} lei
+                            <div className='price'>Sumar comanda: {cartItems.reduce((accumulator, item)=> accumulator + item.qty, 0)} produse</div>
+                            <br />
+                            Cost produse:&emsp;&emsp;&emsp;&emsp;&emsp;{cartItems.reduce((accumulator, item)=> accumulator + item.qty * item.price, 0).toFixed(2)} lei
+                            <br/>
+                            Cost livrare:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;15 lei
                         </ListGroup.Item>
                     </ListGroup>
 
                     <ListGroup>
+                        <ListGroup.Item>
+                            <h5>Total: {cartItems.reduce((accumulator, item)=> (accumulator + item.qty * item.price)+15, 0).toFixed(2)} lei</h5>
+                        </ListGroup.Item>
                         <Button className='btn btn-success mt-3'
                                 type='button'
                                 size="lg" 
